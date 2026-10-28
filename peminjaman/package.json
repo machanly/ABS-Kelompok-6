@@ -1,0 +1,19 @@
+{
+  "name": "peminjaman-service",
+  "version": "1.0.0",
+  "description": "Layanan Peminjaman Fasilitas (pengajuan & status)",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "seed": "node src/seed.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -3,8 +3,10 @@ const bcrypt = require('bcryptjs');
 const config = require('./config');
 const db = require('./db');
 const { authenticate, requireRole, signToken, sendError } = require('./jwtAuth');
+const requestLogger = require('./logger');
 
 const app = express();
+app.use(requestLogger('Katalog'));
 app.use(express.json());
 
 const api = express.Router();
