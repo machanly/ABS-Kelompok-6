@@ -13,8 +13,8 @@ berdasarkan peran dan kepemilikan data.
 | `katalog/` | Layanan Katalog (port 3001): data fasilitas, login, dan JWT | selesai |
 | `peminjaman/` | Layanan Peminjaman (port 3002): pengajuan, cek bentrok jadwal, proses status | selesai |
 | `klien/` | Skrip klien terminal: login, katalog, ajukan, lihat pengajuan sendiri | selesai |
-| `pengujian/` | Skrip uji skenario U01-U10 | belum |
-| `docs/` | Diagram komponen (`diagram_komponen.png`). Panduan dan laporan menyusul | sebagian |
+| `pengujian/` | Skrip uji skenario U01-U10 | selesai |
+| `docs/` | Diagram komponen (`diagram_komponen.png`). Panduan dan laporan menyusul | selesai |
 | `reset-data.js` | Mengembalikan data kedua layanan ke kondisi awal | selesai |
 
 ## Teknologi
