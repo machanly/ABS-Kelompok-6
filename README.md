@@ -10,7 +10,7 @@ berdasarkan peran dan kepemilikan data.
 | Folder / berkas | Isi | Status |
 |---|---|---|
 | `KONTRAK_API.md` | Kesepakatan format, kode status, JWT, dan tujuh endpoint (acuan tim) | selesai |
-| `katalog/` | Layanan Katalog + modul login JWT (port 3001) | belum |
+| `katalog/` | Layanan Katalog (port 3001): data fasilitas, daftar dan detail. Login JWT menyusul | sebagian |
 | `peminjaman/` | Layanan Peminjaman (port 3002) | belum |
 | `klien/` | Skrip klien terminal | belum |
 | `pengujian/` | Skrip uji skenario U01-U10 | belum |
@@ -30,11 +30,27 @@ Node.js 18+, Express, SQLite, jsonwebtoken, bcryptjs.
 
 ## Progres
 - [x] Kerangka repo dan kontrak API
-- [ ] Layanan Katalog
+- [x] Layanan Katalog (fasilitas)
 - [ ] Login, JWT, dan middleware
 - [ ] Layanan Peminjaman
 - [ ] Klien terminal
 - [ ] Dokumentasi, laporan, dan hasil uji
 
 ## Cara menjalankan
-Akan ditambahkan setelah kedua layanan selesai.
+
+Prasyarat: Node.js 18 atau lebih baru.
+
+### Layanan Katalog (port 3001)
+```bash
+cd katalog
+npm install
+npm run seed     # buat/reset data awal (4 fasilitas)
+npm start        # http://localhost:3001/api/v1
+```
+
+Coba di browser atau Postman (belum perlu token pada tahap ini):
+- `GET http://localhost:3001/api/v1/fasilitas`
+- `GET http://localhost:3001/api/v1/fasilitas?category=peralatan`
+- `GET http://localhost:3001/api/v1/fasilitas/1`
+
+Cara menjalankan layanan lain ditambahkan setelah layanannya selesai.
