@@ -12,9 +12,10 @@ berdasarkan peran dan kepemilikan data.
 | `KONTRAK_API.md` | Kesepakatan format, kode status, JWT, dan tujuh endpoint (acuan tim) | selesai |
 | `katalog/` | Layanan Katalog (port 3001): data fasilitas, login, dan JWT | selesai |
 | `peminjaman/` | Layanan Peminjaman (port 3002): pengajuan, cek bentrok jadwal, proses status | selesai |
-| `klien/` | Skrip klien terminal | belum |
+| `klien/` | Skrip klien terminal: login, katalog, ajukan, lihat pengajuan sendiri | selesai |
 | `pengujian/` | Skrip uji skenario U01-U10 | belum |
-| `docs/` | Panduan dan dokumentasi API, laporan | belum |
+| `docs/` | Diagram komponen (`diagram_komponen.png`). Panduan dan laporan menyusul | sebagian |
+| `reset-data.js` | Mengembalikan data kedua layanan ke kondisi awal | selesai |
 
 ## Teknologi
 Node.js 18+, Express, SQLite, jsonwebtoken, bcryptjs.
@@ -33,7 +34,7 @@ Node.js 18+, Express, SQLite, jsonwebtoken, bcryptjs.
 - [x] Layanan Katalog (fasilitas)
 - [x] Login, JWT, dan middleware
 - [x] Layanan Peminjaman
-- [ ] Klien terminal
+- [x] Klien terminal
 - [ ] Dokumentasi, laporan, dan hasil uji
 
 ## Cara menjalankan
@@ -92,3 +93,21 @@ Content-Type: application/json
 Waktu memakai UTC berakhiran `Z`. Jadwal yang bertumpang tindih dengan pengajuan `pending` atau `approved`
 pada fasilitas yang sama dijawab **409**; interval yang hanya bertemu di batas diperbolehkan.
 Log request tiap layanan tercetak di terminalnya (token disamarkan) sebagai bukti panggilan antar layanan.
+
+### Klien terminal
+Kedua layanan harus sudah berjalan.
+```bash
+node klien/klien.js          # login (mhs_budi) -> katalog -> ajukan -> pengajuan saya
+node klien/klien.js --user mhs_citra --pass 'Citra#2026' --fasilitas 2 \
+  --mulai 2026-11-10T08:00:00Z --selesai 2026-11-10T10:00:00Z --tujuan "Praktikum"
+node klien/klien.js --help
+```
+
+### Reset data
+Hentikan kedua layanan, lalu:
+```bash
+node reset-data.js           # menjalankan `npm run seed` di katalog/ dan peminjaman/
+```
+
+### Diagram komponen
+![Diagram komponen](docs/diagram_komponen.png)
