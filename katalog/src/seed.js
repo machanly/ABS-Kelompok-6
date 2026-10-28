@@ -1,4 +1,5 @@
-// Reset + isi data awal fasilitas. Jalankan: npm run seed
+// Reset + isi data awal. Jalankan: npm run seed
+const bcrypt = require('bcryptjs');
 const db = require('./db');
 
 // [id, name, category, description, location, capacity, is_active]
@@ -9,11 +10,20 @@ const facilities = [
   [4, 'Ruang Diskusi Perpustakaan', 'ruangan', 'AC sedang diperbaiki, belum dapat dipinjam.', 'Perpustakaan, Lantai 2', 12, 0],
 ];
 
+// Data fiktif. Peran ditetapkan di sini (server), bukan oleh klien.
+const users = [
+  [1, 'admin', 'Admin#2026', 'admin', 'Admin Sarana'],
+  [2, 'mhs_budi', 'Budi#2026', 'mahasiswa', 'Budi Santoso'],
+  [3, 'mhs_citra', 'Citra#2026', 'mahasiswa', 'Citra Lestari'],
+];
+
 const reset = db.transaction(() => {
-  db.exec('DELETE FROM facilities');
-  const ins = db.prepare('INSERT INTO facilities (id,name,category,description,location,capacity,is_active) VALUES (?,?,?,?,?,?,?)');
-  facilities.forEach((f) => ins.run(...f));
+  db.exec('DELETE FROM users; DELETE FROM facilities;');
+  const insF = db.prepare('INSERT INTO facilities (id,name,category,description,location,capacity,is_active) VALUES (?,?,?,?,?,?,?)');
+  facilities.forEach((f) => insF.run(...f));
+  const insU = db.prepare('INSERT INTO users (id,username,password_hash,role,full_name) VALUES (?,?,?,?,?)');
+  users.forEach(([id, u, pw, role, name]) => insU.run(id, u, bcrypt.hashSync(pw, 10), role, name));
 });
 
 reset();
-console.log(`Seed selesai: ${facilities.length} fasilitas.`);
+console.log(`Seed selesai: ${facilities.length} fasilitas, ${users.length} akun.`);

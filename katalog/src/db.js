@@ -3,12 +3,18 @@ const path = require('path');
 const Database = require('better-sqlite3');
 const config = require('./config');
 
-// Database milik layanan Katalog sendiri (satu berkas SQLite).
 fs.mkdirSync(path.dirname(path.resolve(config.dbFile)), { recursive: true });
 const db = new Database(path.resolve(config.dbFile));
 db.pragma('journal_mode = WAL');
 
 db.exec(`
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY,
+    username TEXT NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    role TEXT NOT NULL CHECK (role IN ('admin','mahasiswa')),
+    full_name TEXT NOT NULL
+  );
   CREATE TABLE IF NOT EXISTS facilities (
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
