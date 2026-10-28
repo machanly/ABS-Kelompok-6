@@ -1,0 +1,6 @@
+$kind: collection
+description: |-
+  Skenario: panggil endpoint dengan token kedaluwarsa.
+  Hasil diharapkan: 401; exp benar-benar diperiksa.
+  Catatan: pre-request script membuat token bertanda tangan benar tetapi exp sudah lewat; butuh variabel environment `jwt_secret` yang sama dengan JWT_SECRET di .env.
+order: 8000

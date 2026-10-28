@@ -1,0 +1,5 @@
+$kind: collection
+description: |-
+  Skenario: waktu selesai sebelum mulai; jadwal bertumpang tindih.
+  Hasil diharapkan: 400 untuk waktu tidak valid; 409 untuk benturan; tidak ada pengajuan baru.
+order: 6000

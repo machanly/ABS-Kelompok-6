@@ -1,0 +1,5 @@
+$kind: collection
+description: |-
+  Skenario: mahasiswa membuat pengajuan valid.
+  Hasil diharapkan: 201 pending; pemilik dari token; panggilan HTTP ke Katalog terbukti (lihat log terminal kedua layanan; fasilitas nonaktif/tidak ada hanya bisa diketahui dari Katalog).
+order: 4000

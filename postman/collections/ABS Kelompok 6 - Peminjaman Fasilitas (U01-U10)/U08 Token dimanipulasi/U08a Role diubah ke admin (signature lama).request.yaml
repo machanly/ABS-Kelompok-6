@@ -1,0 +1,32 @@
+$kind: http-request
+url: "{{peminjaman_url}}/peminjaman"
+method: GET
+headers:
+  Accept: application/json
+  Authorization: Bearer {{token_forged}}
+scripts:
+  - type: beforeRequest
+    code: |-
+      const CJ = require('crypto-js');
+      const b64u = (s) => CJ.enc.Base64.stringify(CJ.enc.Utf8.parse(s)).replace(/=+$/,'').replace(/\+/g,'-').replace(/\//g,'_');
+      const signJwt = (payload, secret) => {
+        const h = b64u(JSON.stringify({alg:'HS256',typ:'JWT'}));
+        const p = b64u(JSON.stringify(payload));
+        const sig = CJ.enc.Base64.stringify(CJ.HmacSHA256(h + '.' + p, secret)).replace(/=+$/,'').replace(/\+/g,'-').replace(/\//g,'_');
+        return h + '.' + p + '.' + sig;
+      };
+
+      const tok = pm.collectionVariables.get('token_budi').split('.');
+      const std = tok[1].replace(/-/g,'+').replace(/_/g,'/');
+      const padded = std + '='.repeat((4 - std.length % 4) % 4);
+      const payload = JSON.parse(CJ.enc.Utf8.stringify(CJ.enc.Base64.parse(padded)));
+      payload.role = 'admin';
+      pm.collectionVariables.set('token_forged', [tok[0], b64u(JSON.stringify(payload)), tok[2]].join('.'));
+      pm.collectionVariables.set('token_none', [b64u(JSON.stringify({alg:'none',typ:'JWT'})), b64u(JSON.stringify({sub:'1',username:'admin',role:'admin',exp:9999999999})), ''].join('.'));
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      pm.test("Status 401", () => pm.response.to.have.status(401));
+      pm.test("error.code = UNAUTHORIZED", () => pm.expect(pm.response.json().error.code).to.eql("UNAUTHORIZED"));
+    language: text/javascript
+order: 1000

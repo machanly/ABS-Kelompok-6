@@ -1,0 +1,5 @@
+$kind: collection
+description: |-
+  Skenario: admin menyetujui satu pending dan menolak pending lain.
+  Hasil diharapkan: 200; status approved/rejected tersimpan dan dapat dilihat pemilik.
+order: 5000

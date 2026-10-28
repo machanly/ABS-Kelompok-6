@@ -1,0 +1,5 @@
+$kind: collection
+description: |-
+  Skenario: mahasiswa mencoba menyetujui pengajuan.
+  Hasil diharapkan: 403; status tidak berubah.
+order: 10000

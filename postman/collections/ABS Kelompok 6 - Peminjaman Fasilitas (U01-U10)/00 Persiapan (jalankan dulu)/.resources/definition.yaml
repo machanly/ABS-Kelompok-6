@@ -1,0 +1,3 @@
+$kind: collection
+description: "Login ketiga akun uji dan pastikan data pengajuan masih kosong. Jika langkah terakhir gagal: hentikan layanan, jalankan `node reset-data.js`, lalu nyalakan lagi."
+order: 1000

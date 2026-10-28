@@ -1,0 +1,25 @@
+$kind: http-request
+url: "{{peminjaman_url}}/peminjaman"
+method: POST
+headers:
+  Accept: application/json
+  Authorization: Bearer {{token_budi}}
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "facility_id": 3,
+      "start_at": "2027-02-13T08:00:00Z",
+      "end_at": "2027-02-13T09:00:00Z",
+      "purpose": "Coba palsukan",
+      "borrower_id": {{id_citra}},
+      "role": "admin"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status 201", () => pm.response.to.have.status(201));
+      pm.test("borrower_id tetap Budi (dari token)", () => pm.expect(pm.response.json().data.borrower_id).to.eql(Number(pm.collectionVariables.get('id_budi'))));
+    language: text/javascript
+order: 5000

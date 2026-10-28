@@ -1,0 +1,5 @@
+$kind: collection
+description: |-
+  Skenario: ubah payload role JWT tanpa signature baru.
+  Hasil diharapkan: 401; token hasil manipulasi ditolak.
+order: 9000

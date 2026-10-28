@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{peminjaman_url}}/peminjaman/{{loan_a}}"
+method: PATCH
+headers:
+  Accept: application/json
+  Authorization: Bearer {{token_admin}}
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "status": "approved",
+      "admin_note": "Disetujui"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status 200", () => pm.response.to.have.status(200));
+      const j = pm.response.json();
+      pm.test("status approved", () => pm.expect(j.data.status).to.eql("approved"));
+      pm.test("processed_by = admin", () => pm.expect(j.data.processed_by).to.eql(Number(pm.collectionVariables.get('id_admin'))));
+    language: text/javascript
+order: 2000

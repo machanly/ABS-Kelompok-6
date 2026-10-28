@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{peminjaman_url}}/peminjaman/{{loan_a}}"
+method: PATCH
+headers:
+  Accept: application/json
+  Authorization: Bearer {{token_admin}}
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "status": "rejected"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status 409", () => pm.response.to.have.status(409));
+      pm.test("error.code = INVALID_TRANSITION", () => pm.expect(pm.response.json().error.code).to.eql("INVALID_TRANSITION"));
+    language: text/javascript
+order: 6000

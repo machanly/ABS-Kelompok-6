@@ -1,0 +1,5 @@
+$kind: collection
+description: |-
+  Skenario: mahasiswa A membaca/mengubah pengajuan B dan mencoba memalsukan borrower_id.
+  Hasil diharapkan: 403 pada akses B; pemilik pengajuan baru tetap berasal dari token.
+order: 11000

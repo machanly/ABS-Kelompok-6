@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{peminjaman_url}}/peminjaman/{{loan_e}}"
+method: GET
+headers:
+  Accept: application/json
+  Authorization: Bearer {{token_admin}}
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status 200", () => pm.response.to.have.status(200));
+      pm.test("pending", () => pm.expect(pm.response.json().data.status).to.eql("pending"));
+    language: text/javascript
+order: 4000

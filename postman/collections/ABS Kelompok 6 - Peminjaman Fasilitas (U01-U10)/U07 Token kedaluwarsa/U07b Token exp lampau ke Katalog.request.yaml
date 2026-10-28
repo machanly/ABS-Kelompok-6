@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{katalog_url}}/fasilitas"
+method: GET
+headers:
+  Accept: application/json
+  Authorization: Bearer {{token_expired}}
+scripts:
+  - type: afterResponse
+    code: pm.test("Status 401", () => pm.response.to.have.status(401));
+    language: text/javascript
+order: 2000

@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{peminjaman_url}}/peminjaman"
+method: POST
+headers:
+  Accept: application/json
+  Authorization: Bearer {{token_citra}}
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "facility_id": 2,
+      "start_at": "2027-02-10T08:00:00Z",
+      "end_at": "2027-02-10T09:00:00Z",
+      "purpose": "Slot rejected"
+    }
+scripts:
+  - type: afterResponse
+    code: pm.test("Status 201", () => pm.response.to.have.status(201));
+    language: text/javascript
+order: 6000

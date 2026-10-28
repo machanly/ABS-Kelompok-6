@@ -1,0 +1,57 @@
+$kind: collection
+description: |-
+  Koleksi pengujian 10 skenario U01-U10.
+
+  Cara pakai: import koleksi dan environment, pilih environment 'ABS Lokal', isi jwt_secret, reset data (node reset-data.js), nyalakan Katalog lalu Peminjaman, lalu Run collection (urut dari atas).
+variables:
+  - key: jwt_secret
+    value: ""
+    disabled: false
+  - key: token_budi
+    value: ""
+    disabled: false
+  - key: id_budi
+    value: ""
+    disabled: false
+  - key: token_citra
+    value: ""
+    disabled: false
+  - key: id_citra
+    value: ""
+    disabled: false
+  - key: token_admin
+    value: ""
+    disabled: false
+  - key: id_admin
+    value: ""
+    disabled: false
+  - key: fas_list_1
+    value: ""
+    disabled: false
+  - key: loan_a
+    value: ""
+    disabled: false
+  - key: loan_b
+    value: ""
+    disabled: false
+  - key: total_before
+    value: ""
+    disabled: false
+  - key: token_forged
+    value: ""
+    disabled: false
+  - key: token_none
+    value: ""
+    disabled: false
+  - key: loan_e
+    value: ""
+    disabled: false
+  - key: json_web_token_0orr
+    secret: true
+    disabled: false
+  - key: token_expired
+    value: ""
+    disabled: false
+  - key: token_valid_ctrl
+    value: ""
+    disabled: false

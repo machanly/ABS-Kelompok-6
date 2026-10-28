@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{peminjaman_url}}/peminjaman"
+method: POST
+headers:
+  Accept: application/json
+  Authorization: Bearer {{token_budi}}
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "facility_id": 99,
+      "start_at": "2027-02-11T08:00:00Z",
+      "end_at": "2027-02-11T09:00:00Z",
+      "purpose": "x"
+    }
+scripts:
+  - type: afterResponse
+    code: pm.test("Status 404", () => pm.response.to.have.status(404));
+    language: text/javascript
+order: 3000

@@ -1,0 +1,27 @@
+$kind: http-request
+url: "{{peminjaman_url}}/peminjaman"
+method: POST
+headers:
+  Accept: application/json
+  Authorization: Bearer {{token_budi}}
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "facility_id": 1,
+      "start_at": "2027-02-10T08:00:00Z",
+      "end_at": "2027-02-10T10:00:00Z",
+      "purpose": "Rapat himpunan"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status 201", () => pm.response.to.have.status(201));
+      const j = pm.response.json();
+      pm.test("status pending", () => pm.expect(j.data.status).to.eql("pending"));
+      pm.test("borrower_id = id dari token", () => pm.expect(j.data.borrower_id).to.eql(Number(pm.collectionVariables.get('id_budi'))));
+      pm.test("Header Location menunjuk pengajuan baru", () => pm.expect(pm.response.headers.get('Location')).to.eql('/api/v1/peminjaman/' + j.data.id));
+      pm.collectionVariables.set('loan_a', j.data.id);
+    language: text/javascript
+order: 1000

@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{peminjaman_url}}/peminjaman"
+method: GET
+headers:
+  Accept: application/json
+  Authorization: Bearer {{token_admin}}
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status 200", () => pm.response.to.have.status(200));
+      pm.test("Tidak ada pengajuan baru", () => pm.expect(pm.response.json().meta.total).to.eql(pm.collectionVariables.get('total_before')));
+    language: text/javascript
+order: 4000

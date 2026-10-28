@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{peminjaman_url}}/peminjaman"
+method: POST
+headers:
+  Accept: application/json
+  Authorization: Bearer {{token_budi}}
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "facility_id": 3,
+      "start_at": "2027-02-12T08:00:00Z",
+      "end_at": "2027-02-12T09:00:00Z",
+      "purpose": "Proyektor seminar"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status 201", () => pm.response.to.have.status(201));
+      pm.collectionVariables.set('loan_e', pm.response.json().data.id);
+    language: text/javascript
+order: 1000

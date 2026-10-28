@@ -1,0 +1,13 @@
+# Use this workspace to collaborate
+workspace:
+  id: 2a3bce8c-1849-4e04-83ff-ea436e5280f1
+
+cloudResources:
+  collections:
+    ../postman/collections/ABS Kelompok 6 - Peminjaman Fasilitas (U01-U10): 6f858329-91a0-4d6e-b532-56e5e0c14afa
+
+# All resources in the `postman/` folder are automatically registered in Local View.
+# Point to additional files outside the `postman/` folder to register them individually. Example:
+#localResources:
+#  collections:
+#    - ../tests/E2E Test Collection/

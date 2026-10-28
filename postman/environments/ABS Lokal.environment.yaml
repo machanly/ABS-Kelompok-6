@@ -1,0 +1,9 @@
+name: ABS Lokal
+values:
+  - key: katalog_url
+    value: 'http://localhost:3001/api/v1'
+  - key: peminjaman_url
+    value: 'http://localhost:3002/api/v1'
+  - key: jwt_secret
+    value: 'ganti-dengan-secret-acak-minimal-32-karakter'
+    secret: true

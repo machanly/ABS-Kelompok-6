@@ -1,0 +1,5 @@
+$kind: collection
+description: |-
+  Skenario: login benar lalu login dengan password salah.
+  Hasil diharapkan: 200 dengan JWT; percobaan salah 401 tanpa JWT.
+order: 2000

@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{peminjaman_url}}/peminjaman/{{loan_b}}"
+method: GET
+headers:
+  Accept: application/json
+  Authorization: Bearer {{token_budi}}
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status 403", () => pm.response.to.have.status(403));
+      pm.test("error.code = FORBIDDEN", () => pm.expect(pm.response.json().error.code).to.eql("FORBIDDEN"));
+    language: text/javascript
+order: 2000

@@ -1,0 +1,5 @@
+$kind: collection
+description: |-
+  Skenario: baca daftar dan detail fasilitas; ulangi GET.
+  Hasil diharapkan: 200; data sesuai data awal dan tidak berubah akibat GET.
+order: 3000

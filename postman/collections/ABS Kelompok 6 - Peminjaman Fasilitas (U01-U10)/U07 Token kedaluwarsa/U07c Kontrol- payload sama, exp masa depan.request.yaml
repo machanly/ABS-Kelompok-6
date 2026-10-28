@@ -1,0 +1,18 @@
+$kind: http-request
+name: "U07c Kontrol: payload sama, exp masa depan"
+url: "{{peminjaman_url}}/peminjaman"
+method: GET
+headers:
+  Accept: application/json
+  Authorization: Bearer {{token_valid_ctrl}}
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0orr}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status 200", () => pm.response.to.have.status(200));
+      pm.test("Penolakan sebelumnya karena exp (bukan hal lain)", () => pm.expect(pm.response.code).to.eql(200));
+    language: text/javascript
+order: 3000

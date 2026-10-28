@@ -1,0 +1,5 @@
+$kind: collection
+description: |-
+  Skenario: panggil endpoint terlindungi tanpa token.
+  Hasil diharapkan: 401; tidak ada perubahan data.
+order: 7000

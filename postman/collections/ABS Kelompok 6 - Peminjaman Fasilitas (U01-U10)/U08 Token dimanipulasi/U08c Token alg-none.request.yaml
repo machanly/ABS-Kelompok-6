@@ -1,0 +1,12 @@
+$kind: http-request
+name: U08c Token alg:none
+url: "{{peminjaman_url}}/peminjaman"
+method: GET
+headers:
+  Accept: application/json
+  Authorization: Bearer {{token_none}}
+scripts:
+  - type: afterResponse
+    code: pm.test("Status 401", () => pm.response.to.have.status(401));
+    language: text/javascript
+order: 3000

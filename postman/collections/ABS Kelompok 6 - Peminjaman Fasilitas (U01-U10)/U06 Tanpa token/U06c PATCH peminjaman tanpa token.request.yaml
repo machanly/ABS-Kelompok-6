@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{peminjaman_url}}/peminjaman/{{loan_a}}"
+method: PATCH
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "status": "approved"
+    }
+scripts:
+  - type: afterResponse
+    code: pm.test("Status 401", () => pm.response.to.have.status(401));
+    language: text/javascript
+order: 3000

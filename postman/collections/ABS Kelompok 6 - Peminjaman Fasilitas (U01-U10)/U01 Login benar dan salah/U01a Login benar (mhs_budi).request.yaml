@@ -1,0 +1,24 @@
+$kind: http-request
+url: "{{katalog_url}}/auth/login"
+method: POST
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "username": "mhs_budi",
+      "password": "Budi#2026"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status 200", () => pm.response.to.have.status(200));
+      const j = pm.response.json();
+      pm.test("Berisi JWT 3 bagian", () => pm.expect(j.data.access_token.split('.').length).to.eql(3));
+      pm.test("Respons tidak memuat password/hash", () => pm.expect(pm.response.text().toLowerCase()).to.not.include('password'));
+      pm.collectionVariables.set('token_budi', j.data.access_token);
+      pm.collectionVariables.set('id_budi', j.data.user.id);
+    language: text/javascript
+order: 1000
